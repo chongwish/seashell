@@ -31,7 +31,7 @@ declare -Ag __SEASHELL_LINUX_CONTAINER_LXD_IMAGES=(
 # Usage:
 #     mount_disk $host_path $disk_name@$container_name:$path
 function mount_disk() {
-    if [ ! -f "$1" -a ! -d "$1" ]; then panic FILE_NONEXISTENT "Function mount_disk needs a existed path."; fi
+    if [ ! -e "$1" ]; then panic FILE_NONEXISTENT "Function mount_disk needs a existed path."; fi
     local disk="${2%:*}"
     lxc config device add "${disk#*@}" "${disk%@*}" disk path="${2#*:}" source="$1"
 }
