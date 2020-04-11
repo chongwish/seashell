@@ -13,7 +13,7 @@ function for_each() {
     elif [[ "$SEASHELL_CURRENT_SHELL" == "bash" ]]; then
        for k in "${!'$1'[@]}"; do '$2' "$k" "${'$1'[$k]}"; done;
     else
-      exit;
+       panic SYSTEM_SHELL_UNSUPPORT "Function for_each of map is only supported in the bash/zsh.";
     fi
     '
 }
@@ -36,7 +36,7 @@ function map() {
     elif [[ "$SEASHELL_CURRENT_SHELL" == "bash" ]]; then
       for k in "${!'$1'[@]}"; do '$3'[$k]=`'$2' "$k" "${'$1'[$k]}"`; done;
     else
-      exit;
+      panic SYSTEM_SHELL_UNSUPPORT "Function map of array is only supported in the bash/zsh.";
     fi
     '
 }

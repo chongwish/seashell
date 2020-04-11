@@ -6,7 +6,7 @@
 #     $(for_each index_array `lambda fn`) or `for_each index_array $(lambda fn)`
 #     fn is a function needs only one parameter
 function for_each() {
-    if [[ $# -lt 2 ]]; then exit; fi
+    if [[ $# -lt 2 ]]; then panic "Function for_each of array needs 2 arguments."; fi
     # for i in "${@:1:`expr $# - 1`}"; do ${@:(-1)} "$i"; done
     echo '
     eval
@@ -24,7 +24,7 @@ function for_each() {
 #     then:
 #       index_array_b=(2 3 4)
 function map() {
-    if [[ $# -ne 3 ]]; then exit; fi
+    if [[ $# -ne 3 ]]; then panic "Function map of array needs 3 arguments."; fi
     echo '
     eval
     declare -a '$3'=(); for i in "${'$1'[@]}"; do '$3'+=(`'$2' "$i"`); done
